@@ -1,0 +1,156 @@
+﻿body {
+    font-family: Calibri, sans-serif;
+}
+
+#main-content {
+    margin-top: 80px;
+    padding-bottom: 160px;
+}
+
+/* blue header */
+
+.header-custom-blue {
+    background-color: #085394;
+}
+
+    .header-custom-blue .navbar .navbar-toggler {
+        border-color: rgba(255,255,255,0.3);
+    }
+
+    .header-custom-blue .action-button, .header-custom-blue .action-button:not(.disabled):active, .header-custom-blue .action-button:hover {
+        border: 1px solid rgba(255,255,255,0.7);
+        padding: .2rem 1.8rem;
+        font-size: 1.3rem;
+    }
+
+/* white header */
+
+.header-white {
+    background-color: white;
+}
+
+    .header-white .navbar .navbar-toggler {
+        border-color: rgba(0,0,0,0.4);
+    }
+
+    .header-white .navbar .navbar-brand {
+        color: #085394;
+    }
+
+/* login and signup widgets */
+
+.login {
+    background-color: white;
+    color: black;
+    padding: 0 7% 7% 7%;
+    margin-top: 100px;
+    text-shadow: lightgray 1px 1px 0;
+    border-radius: 10px;
+}
+
+/* buttons */
+
+.action-button, .action-button:not(.disabled):active, .action-button:hover {
+    color: white;
+    background-color: #085394 !important;
+    border-radius: 0;
+    padding: 0 0.8rem 0 0.8rem;
+    box-shadow: none !important;
+    transition: none;
+}
+
+/* toggle buttons */
+
+.toggle-button {
+    color: black;
+    background-color: rgba(149, 188, 242, 1);
+    border-color: rgba(8, 83, 148, 1);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+    .toggle-button:hover {
+        color: #fff;
+        background-color: rgba(8, 83, 148, 1);
+    }
+
+    .toggle-button.focus, .toggle-button:focus {
+        box-shadow: none;
+    }
+
+    .toggle-button:not(:disabled):not(.disabled).active, .toggle-button:not(:disabled):not(.disabled):active, .show > .toggle-button.dropdown-toggle {
+        background-color: rgba(8, 83, 148, 1);
+    }
+
+/* form labels */
+
+.order-label {
+    width: 100px;
+    font-weight: bold;
+}
+
+.order-form .form-group * {
+    height: 26px;
+}
+
+/* date and time */
+
+.datetimeitem {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* tab pane */
+
+.list-group-item {
+    border: none;
+}
+
+    .list-group-item.active {
+        color: black;
+        background-color: #95bcf2;
+    }
+
+/* fix checkbox labels */
+
+.form-check-label {
+    padding-left: 20px;
+}
+
+@media (min-width: 576px) {
+    .form-check-label {
+        padding-left: 2px;
+    }
+}
+
+.form-check-input-large input {
+    width: 37px;
+    height: 37px;
+}
+
+/* inline dropdown menus */
+
+select + select {
+    margin-left: 1%;
+}
+
+/* content titles */
+
+h4 {
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+/* support page */
+
+.support-element {
+    margin-left: 100px;
+}
+
+.support-link {
+    padding-left: 0;
+    color: #085394;
+    font-size: 1.2rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}

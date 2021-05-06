@@ -1,0 +1,639 @@
+/* create first database */
+
+USE [master]
+GO
+CREATE DATABASE [aspnet-cryptoexch]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'aspnet-cryptoexch.mdf', FILENAME = N'C:\App_Data\aspnet-cryptoexch.mdf',  SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 512KB )
+ LOG ON 
+( NAME = N'aspnet-cryptoexch_log.ldf', FILENAME = N'C:\App_Data\aspnet-cryptoexch_log.ldf', SIZE = 640KB , MAXSIZE = 2048GB , FILEGROWTH = 64KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET COMPATIBILITY_LEVEL = 130
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [aspnet-cryptoexch].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET READ_COMMITTED_SNAPSHOT ON 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET  MULTI_USER 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET QUERY_STORE = OFF
+GO
+USE [aspnet-cryptoexch]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__MigrationHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ContextKey] [nvarchar](300) NOT NULL,
+	[Model] [varbinary](max) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK_dbo.__MigrationHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC,
+	[ContextKey] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetRoles](
+	[Id] [nvarchar](128) NOT NULL,
+	[Name] [nvarchar](256) NOT NULL,
+ CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserClaims](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [nvarchar](128) NOT NULL,
+	[ClaimType] [nvarchar](max) NULL,
+	[ClaimValue] [nvarchar](max) NULL,
+ CONSTRAINT [PK_dbo.AspNetUserClaims] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserLogins](
+	[LoginProvider] [nvarchar](128) NOT NULL,
+	[ProviderKey] [nvarchar](128) NOT NULL,
+	[UserId] [nvarchar](128) NOT NULL,
+ CONSTRAINT [PK_dbo.AspNetUserLogins] PRIMARY KEY CLUSTERED 
+(
+	[LoginProvider] ASC,
+	[ProviderKey] ASC,
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUserRoles](
+	[UserId] [nvarchar](128) NOT NULL,
+	[RoleId] [nvarchar](128) NOT NULL,
+ CONSTRAINT [PK_dbo.AspNetUserRoles] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AspNetUsers](
+	[Id] [nvarchar](128) NOT NULL,
+	[Email] [nvarchar](256) NULL,
+	[EmailConfirmed] [bit] NOT NULL,
+	[PasswordHash] [nvarchar](max) NULL,
+	[SecurityStamp] [nvarchar](max) NULL,
+	[PhoneNumber] [nvarchar](max) NULL,
+	[PhoneNumberConfirmed] [bit] NOT NULL,
+	[TwoFactorEnabled] [bit] NOT NULL,
+	[LockoutEndDateUtc] [datetime] NULL,
+	[LockoutEnabled] [bit] NOT NULL,
+	[AccessFailedCount] [int] NOT NULL,
+	[UserName] [nvarchar](256) NOT NULL,
+ CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex] ON [dbo].[AspNetRoles]
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserClaims]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserLogins]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[AspNetUserRoles]
+(
+	[RoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+CREATE NONCLUSTERED INDEX [IX_UserId] ON [dbo].[AspNetUserRoles]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex] ON [dbo].[AspNetUsers]
+(
+	[UserName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[AspNetUserClaims]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserClaims] CHECK CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[AspNetUserLogins]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserLogins] CHECK CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId]
+GO
+ALTER TABLE [dbo].[AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[AspNetRoles] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId]
+GO
+ALTER TABLE [dbo].[AspNetUserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]
+GO
+USE [master]
+GO
+ALTER DATABASE [aspnet-cryptoexch] SET  READ_WRITE 
+GO
+
+/* create second database */
+
+USE [master]
+GO
+CREATE DATABASE [cryptoexchDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'cryptoexch', FILENAME = N'C:\App_Data\cryptoexch.mdf', SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 512KB )
+ LOG ON 
+( NAME = N'cryptoexch_log', FILENAME = N'C:\App_Data\cryptoexch_log.mdf', SIZE = 640KB , MAXSIZE = 2048GB , FILEGROWTH = 64KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [cryptoexchDB] SET COMPATIBILITY_LEVEL = 130
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [cryptoexchDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [cryptoexchDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [cryptoexchDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [cryptoexchDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [cryptoexchDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [cryptoexchDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [cryptoexchDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [cryptoexchDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [cryptoexchDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [cryptoexchDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [cryptoexchDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [cryptoexchDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [cryptoexchDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [cryptoexchDB] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [cryptoexchDB] SET QUERY_STORE = OFF
+GO
+USE [cryptoexchDB]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Wallet](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ClientID] [nvarchar](128) NOT NULL,
+	[CurrencyID] [int] NOT NULL,
+	[Address] [varchar](255) NOT NULL,
+	[Balance] [float] NULL,
+ CONSTRAINT [PK_Wallet_1] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Currency](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Ticker] [char](3) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Symbol] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_Currency] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION [dbo].[ClientPortfolioView] (@clientID NVARCHAR(128))
+RETURNS TABLE
+AS RETURN
+	SELECT Name, CONCAT(Symbol, b) AS Balance
+	FROM Currency INNER JOIN (SELECT CurrencyID, SUM(Balance) AS b
+		FROM Wallet
+		WHERE ClientID = @clientID
+		GROUP BY CurrencyID) AS t
+	ON Currency.ID = t.CurrencyID;
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Client](
+	[ID] [nvarchar](128) NOT NULL,
+	[FirstName] [varchar](30) NULL,
+	[LastName] [varchar](20) NULL,
+	[Address] [varchar](20) NULL,
+	[City] [varchar](20) NULL,
+	[Country] [varchar](20) NULL,
+	[BankAccount] [char](19) NULL,
+	[Verified] [bit] NOT NULL,
+	[Doc1URI] [varchar](255) NULL,
+	[Doc2URI] [varchar](255) NULL,
+ CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CurrencyPair](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[FirstCurrencyID] [int] NOT NULL,
+	[SecondCurrencyID] [int] NOT NULL,
+	[Heading] [char](7) NOT NULL,
+	[Last] [float] NOT NULL,
+	[Open] [float] NOT NULL,
+	[High] [float] NOT NULL,
+	[Low] [float] NOT NULL,
+	[24hours] [float] NOT NULL,
+	[Change]  AS (concat((([Last]-[Open])/[Open])*(100),'%')) PERSISTED NOT NULL,
+ CONSTRAINT [PK_CurrencyPair] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Employee](
+	[ID] [nvarchar](128) NOT NULL,
+	[EmploymentDate] [datetimeoffset](7) NOT NULL,
+	[FirstName] [varchar](20) NOT NULL,
+	[LastName] [varchar](20) NOT NULL,
+	[Address] [varchar](20) NOT NULL,
+	[City] [varchar](20) NOT NULL,
+	[Email] [varchar](40) NOT NULL,
+	[Division] [varchar](20) NOT NULL,
+	[Title] [varchar](30) NOT NULL,
+	[TerminationDate] [datetimeoffset](7) NULL,
+ CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Incident](
+	[ID] [int] NOT NULL,
+	[Timestamp] [datetimeoffset](7) NOT NULL,
+	[Title] [varchar](30) NOT NULL,
+	[Content] [varchar](max) NOT NULL,
+	[Status] [varchar](8) NOT NULL,
+	[AssignedTo] [nvarchar](128) NULL,
+ CONSTRAINT [PK_Incident] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Order](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ClientID] [nvarchar](128) NOT NULL,
+	[CurrencyPairID] [int] NOT NULL,
+	[Beginning] [datetimeoffset](7) NOT NULL,
+	[Type] [varchar](10) NOT NULL,
+	[Amount] [float] NOT NULL,
+	[Limit] [float] NOT NULL,
+	[Total] [float] NOT NULL,
+	[Expiration] [datetimeoffset](7) NULL,
+	[EndType] [varchar](10) NULL,
+ CONSTRAINT [PK_Order_1] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Topic](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[CreatedBy] [nvarchar](128) NOT NULL,
+	[CreatedTimestamp] [datetimeoffset](7) NOT NULL,
+	[Category] [varchar](50) NOT NULL,
+	[Title] [varchar](30) NOT NULL,
+	[Content] [varchar](max) NOT NULL,
+	[EditedBy] [nvarchar](128) NULL,
+	[EditedTimestamp] [datetimeoffset](7) NULL,
+ CONSTRAINT [PK_Topic] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Transaction](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ClientID] [nvarchar](128) NOT NULL,
+	[CurrencyID] [int] NOT NULL,
+	[Timestamp] [datetimeoffset](7) NOT NULL,
+	[Type] [varchar](10) NOT NULL,
+	[Amount] [float] NOT NULL,
+	[Fee] [float] NULL,
+ CONSTRAINT [PK_Transaction_1] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Incident]  WITH CHECK ADD  CONSTRAINT [FK_Incident_Employee] FOREIGN KEY([AssignedTo])
+REFERENCES [dbo].[Employee] ([ID])
+GO
+ALTER TABLE [dbo].[Incident] CHECK CONSTRAINT [FK_Incident_Employee]
+GO
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_Client] FOREIGN KEY([ClientID])
+REFERENCES [dbo].[Client] ([ID])
+GO
+ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_Client]
+GO
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_CurrencyPair] FOREIGN KEY([CurrencyPairID])
+REFERENCES [dbo].[CurrencyPair] ([ID])
+GO
+ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_CurrencyPair]
+GO
+ALTER TABLE [dbo].[Topic]  WITH CHECK ADD  CONSTRAINT [FK_Topic_Employee] FOREIGN KEY([CreatedBy])
+REFERENCES [dbo].[Employee] ([ID])
+GO
+ALTER TABLE [dbo].[Topic] CHECK CONSTRAINT [FK_Topic_Employee]
+GO
+ALTER TABLE [dbo].[Topic]  WITH CHECK ADD  CONSTRAINT [FK_Topic_Employee1] FOREIGN KEY([EditedBy])
+REFERENCES [dbo].[Employee] ([ID])
+GO
+ALTER TABLE [dbo].[Topic] CHECK CONSTRAINT [FK_Topic_Employee1]
+GO
+ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_Client] FOREIGN KEY([ClientID])
+REFERENCES [dbo].[Client] ([ID])
+GO
+ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_Client]
+GO
+ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_Currency] FOREIGN KEY([CurrencyID])
+REFERENCES [dbo].[Currency] ([ID])
+GO
+ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_Currency]
+GO
+ALTER TABLE [dbo].[Wallet]  WITH CHECK ADD  CONSTRAINT [FK_Wallet_Client] FOREIGN KEY([ClientID])
+REFERENCES [dbo].[Client] ([ID])
+GO
+ALTER TABLE [dbo].[Wallet] CHECK CONSTRAINT [FK_Wallet_Client]
+GO
+ALTER TABLE [dbo].[Wallet]  WITH CHECK ADD  CONSTRAINT [FK_Wallet_Currency] FOREIGN KEY([CurrencyID])
+REFERENCES [dbo].[Currency] ([ID])
+GO
+ALTER TABLE [dbo].[Wallet] CHECK CONSTRAINT [FK_Wallet_Currency]
+GO
+USE [master]
+GO
+ALTER DATABASE [cryptoexchDB] SET  READ_WRITE 
+GO
+
+/* insert sample values */
+
+USE [master]
+GO
+USE [aspnet-cryptoexch]
+GO
+INSERT [dbo].[AspNetUsers] ([Id], [Email], [EmailConfirmed], [PasswordHash], [SecurityStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEndDateUtc], [LockoutEnabled], [AccessFailedCount], [UserName]) VALUES
+(N'0b67a696-eb10-4a77-a646-0ec81902e63d', N'billg@mac.com', 0, N'ADRHwwFHXX12laEHLyMYmIZYE++IAbRG7MIoZjf3E0J1uGrAIy6ILj6NYo2nqJ4GrQ==', N'e4ef9370-2a27-4f78-bbaa-fa3ae1a2586f', NULL, 0, 0, NULL, 0, 0, N'billg')
+GO
+USE [cryptoexchDB]
+GO
+INSERT [dbo].[Client] ([ID], [FirstName], [LastName], [Address], [City], [Country], [BankAccount], [Verified], [Doc1URI], [Doc2URI]) VALUES
+(N'0b67a696-eb10-4a77-a646-0ec81902e63d', N'', N'', N'', N'', N'Switzerland', N'', 0, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[Currency] ON
+INSERT [dbo].[Currency] ([ID], [Ticker], [Name], [Symbol]) VALUES
+(1, N'EUR', N'Euro (EUR)', N'€'),
+(2, N'USD', N'Dollar (USD)', N'$'),
+(3, N'BTC', N'Bitcoin (BTC)', N'₿'),
+(4, N'ETH', N'Ethereum (ETH)', N'Ξ'),
+(5, N'XRP', N'Ripple (XRP)', N'✘')
+SET IDENTITY_INSERT [dbo].[Currency] OFF
+GO
+SET IDENTITY_INSERT [dbo].[CurrencyPair] ON 
+INSERT [dbo].[CurrencyPair] ([ID], [FirstCurrencyID], [SecondCurrencyID], [Heading], [Last], [Open], [High], [Low], [24hours]) VALUES
+(3, 1, 3, N'BTC/EUR', 3440.1, 3517.2, 3643.7, 3050.1, 21889.07),
+(5, 4, 1, N'ETH/EUR', 122.17, 120.78, 122.76, 120.49, 6443.2),
+(6, 5, 1, N'XRP/EUR', 0.276295, 0.275365, 0.278682, 0.274082, 1211.7),
+(10, 4, 3, N'ETH/BTC', 0.034194, 0.034119, 0.034257, 0.034062, 27.1),
+(12, 5, 3, N'XRP/BTC', 7.757E-05, 7.773E-05, 7.773E-05, 7.7742E-05, 76211.31),
+(14, 5, 4, N'XRP/ETH', 0.002267, 0.00228, 0.00228, 0.00226435, 38703.1)
+SET IDENTITY_INSERT [dbo].[CurrencyPair] OFF
+GO
+INSERT [dbo].[Employee] ([ID], [EmploymentDate], [FirstName], [LastName], [Address], [City], [Email], [Division], [Title], [TerminationDate]) VALUES
+(N'2f5b3ba7-9d82-405e-b51e-a827e6068f81', CAST(N'2021-05-06T16:37:20.2736318+02:00' AS DateTimeOffset), N'Peter', N'Peterson', N'Milky Way 2', N'Singapore', N'peter@son.com', N'Security', N'Security Guard', NULL),
+(N'2fdd4fbe-9a88-4ab0-bb78-88b1cdc3d107', CAST(N'2019-05-14T04:30:11.7887966+02:00' AS DateTimeOffset), N'Rhonda', N'Sorenson', N'Catwalk 7', N'Albuquerque', N'rhonda@sorenson.com', N'PR', N'Phone Operator', NULL),
+(N'a76a16f8-4425-4561-9d64-1c459c2e5088', CAST(N'2019-05-13T00:00:00.0000000+02:00' AS DateTimeOffset), N'Franny', N'Globetrotter', N'Vorten 5', N'New York', N'franny@email.com', N'Marketing', N'Head of Department', NULL),
+(N'd4f5e627-f78c-454c-a871-2c3b8e8ad8e4', CAST(N'2019-05-12T00:00:00.0000000+02:00' AS DateTimeOffset), N'Joseph', N'Martin', N'Veracruise 3', N'London', N'josephm@email.com', N'Logistics', N'Head of Department', CAST(N'2019-05-13T00:00:00.0000000+02:00' AS DateTimeOffset))
+GO
+SET IDENTITY_INSERT [dbo].[Order] ON 
+INSERT [dbo].[Order] ([ID], [ClientID], [CurrencyPairID], [Beginning], [Type], [Amount], [Limit], [Total], [Expiration], [EndType]) VALUES
+(1, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 14, CAST(N'2019-05-15T03:51:14.5885454+02:00' AS DateTimeOffset), N'buymarket', 42, 0.0022670000325888395, 0.095214001834392548, NULL, NULL),
+(2, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 5, CAST(N'2021-05-07T15:58:20.6115465+02:00' AS DateTimeOffset), N'buymarket', 120, 122.16999816894531, 14660.400390625, CAST(N'2021-06-06T15:58:20.6115465+02:00' AS DateTimeOffset), NULL)
+SET IDENTITY_INSERT [dbo].[Order] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Transaction] ON
+INSERT [dbo].[Transaction] ([ID], [ClientID], [CurrencyID], [Timestamp], [Type], [Amount], [Fee]) VALUES
+(1, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 1, CAST(N'2017-08-11T13:56:00.0000000+02:00' AS DateTimeOffset), N'deposit', 100, 0),
+(2, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 3, CAST(N'2017-08-13T15:20:07.0000000+02:00' AS DateTimeOffset), N'order', 0.002, 0),
+(3, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 1, CAST(N'2017-08-13T15:20:07.0000000+02:00' AS DateTimeOffset), N'order', -6.69, 0.01),
+(4, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 3, CAST(N'2017-08-13T15:20:07.0000000+02:00' AS DateTimeOffset), N'order', 0.02787, 7E-05),
+(5, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 1, CAST(N'2017-08-13T15:20:07.0000000+02:00' AS DateTimeOffset), N'order', -93.28, 0),
+(6, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 3, CAST(N'2017-08-13T15:46:40.0000000+02:00' AS DateTimeOffset), N'deposit', 0.07985, 0),
+(7, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 1, CAST(N'2017-08-13T16:20:26.0000000+02:00' AS DateTimeOffset), N'deposit', 0.14038, 0),
+(8, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 1, CAST(N'2017-08-13T17:55:04.0000000+02:00' AS DateTimeOffset), N'deposit', 100, 0),
+(9, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 4, CAST(N'2017-08-26T15:54:27.0000000+02:00' AS DateTimeOffset), N'deposit', 0.18577, 0),
+(10, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 1, CAST(N'2017-09-01T11:01:59.0000000+02:00' AS DateTimeOffset), N'deposit', 200, 0),
+(11, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 3, CAST(N'2017-09-02T13:39:16.0000000+02:00' AS DateTimeOffset), N'order', -0.25003, 0),
+(12, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 1, CAST(N'2017-09-02T13:39:16.0000000+02:00' AS DateTimeOffset), N'order', 997.91, 2.59),
+(13, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 3, CAST(N'2017-09-02T13:45:24.0000000+02:00' AS DateTimeOffset), N'order', -0.18577, 0),
+(14, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 1, CAST(N'2017-09-02T13:45:24.0000000+02:00' AS DateTimeOffset), N'order', 56.75, 0.14)
+SET IDENTITY_INSERT [dbo].[Transaction] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Wallet] ON
+INSERT [dbo].[Wallet] ([ID], [ClientID], [CurrencyID], [Address], [Balance]) VALUES
+(3, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 1, N'AwIizRDdj82fh3Z3H3Tp1xwcoVINfhGTsGdnkk3xXqK0sf7mt1RcxZGUxAiECjZUMmvNXupzyIg2zFhacGsjWZRXaF2H2MQoqE2v0xvJWr2ucz7jfbtFMnrS3QC0L60cT3okv2gqQJ7u8QbH28Va8FXf7jJcGczlQodp2AfUETibn4QOCavkYoKjAettyegX24hNsOIUwNaHi0DuT6YLvJdu1VJK0kpgoQO32NFxPM1sTN5uyX01u8LRXbH8G8r', 1085.72),
+(5, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 3, N'TI0fG2T6WVcq95GLxzOI5V2bSamvrB8NxjteAE40vDc10sbaWDclsTmM0YueTzh38raTjS5XDuxBa92ZQ6u5x774N654QCEcGmkWPmobwSI9hzgdILFfYxGDDpthD5GZp7NDS22LcPUfx3Sdew0kyo51DfA0rDXZvlhFRdzprqGWpImyHN2yzB3kHshmIko8wwJS1bvbsDR1Oy5tdDiihn3R6WKxpMHlKSUkgt0lB2k2XV6iV4txe84IoEkC3ns', 0),
+(6, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 4, N'bIblCeYukmk1nabUmd4JjYuo2SmU3YkIgmZA8elmBZyO4r2uzAE60c1arC0AaRzNGOp0VvjmBcsa9OR3n2XBBiuuDL8v6SvaocxrmrBT7laMuQo89qGx51mATBNpHrEAiRxFFiKyhu1m55xNvIrxq527gcfqhLDD3LPb94liTO3GKwce1ifyMO37ysqjs7Czm80CzN0E0BIEIo9TCSrYdJhMy6SHUStEwyxMK1OkmQpQ7EAWseAlB2aQBdjUBqm', 0),
+(7, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 5, N'RLTvSJAM9k5GKnUXZtjqNaigHv6VC3nrdHSMcSAuf2FGvyvMm4I6ErESE2r8pEACF9bCMUcm4hLbkrxVtv6Go2qzwX6TfRXiulyL7IDeCx7Nx7i9R1OoViNLdFBOGD6bYKdhtMZ0F6O3STVWClL9vpwzqcE0D57pgpAuR3NqALGg6Rit4RbuMSrIFoNRZikqjZ6XrRwlFNF9VaeQuHWcrg4qLfWVvKiMqmaKXExqOhPNuPJWaYSGzsAyHLADRho', 5534.31953),
+(8, N'0b67a696-eb10-4a77-a646-0ec81902e63d', 3, N'AP9BgVKDGAgrtAq3Zi5bSh6nM1oJEePXW72ZWsXPNnRTeQwLrXigpwNLdKfOY2ENspYWaDjmkF7cAUhgWPgL3QzdEjaNaRsJop0WP3c52543h1rtBv7eyGkWYVk2n4EFUze4X8FMbyOlG7cIidJmwCWKxAhWMSlmD2EMEXAgkv1GJMXiAaZTUjCB4PIhoTNUWoovXngThfy27wLZHHoIgFMMRuC54czrUp8hys9YKteIcCi6NR4YCFeYxk7CiWO', 226)
+SET IDENTITY_INSERT [dbo].[Wallet] OFF
+GO
