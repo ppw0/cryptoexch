@@ -1,5 +1,7 @@
 # cryptoexch
 
+A classroom example of a web site using ASP.NET and EF to showcase adding, removing and retrieving data from a database with SQL and LINQ.
+
 ## requirements
 - Visual Studio 2019
 + ASP.NET and web development workload
