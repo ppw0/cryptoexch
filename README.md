@@ -1,5 +1,9 @@
 # cryptoexch
 
+## requirements
+- Visual Studio 2019
++ ASP.NET and web development workload
+
 ## setting up
 1. create an `App_Data` folder on `C:`
 2. run `RecreateDB.sql` in SSMS or equivalent
